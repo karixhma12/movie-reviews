@@ -22,6 +22,36 @@ app.get("/secret",(req,res)=>{
     res.json({message : "Welcome! You are authorized!"});
 })
 
+app.get("/sum",(req,res)=>{
+    const a = parseInt(req.query.a);
+    const b = parseInt(req.query.b);
+    res.json({sum : a+b});
+})
+
+app.get("/multiply",(req,res)=>{
+    const a = parseInt(req.query.a);
+    const b = parseInt(req.query.b);
+    res.json({product : a*b});
+})
+
+app.get("/divide",(req,res)=>{
+    const a = parseInt(req.query.a);
+    const b = parseInt(req.query.b);
+    if(b==0){
+        res.json({message : "Division by 0 is not possible!"});
+    }
+    else{
+        res.json({answer : a/b});
+    }
+})
+
+app.get("/subtract",(req,res)=>{
+    const a = parseInt(req.query.a);
+    const b = parseInt(req.query.b);
+    res.json({answer : a-b});
+})
+
+
 app.listen(3000,()=>{
     console.log("Server is listening on port 3000");
 })
