@@ -2,6 +2,19 @@ const express = require("express");
 
 const app = express();
 
+let count = 0;
+
+app.use((req,res,next)=>{
+    if(req.url!=="/request-counts"){
+        count++;
+    }
+    next();
+})
+
+app.get("/request-counts",(req,res)=>{
+    res.json({message : `There have been ${count} requests sent so far`});
+})
+
 app.get("/",(req,res)=>{
     res.json({message : "Movie Review API is running!"});
 })
