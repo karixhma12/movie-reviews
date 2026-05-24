@@ -4,11 +4,25 @@ const app = express();
 
 let count = 0;
 
+app.use(express.json());
+
 app.use((req,res,next)=>{
     if(req.url!=="/request-counts"){
         count++;
     }
     next();
+})
+
+let reviews = [];
+
+app.post("/reviews",(req,res)=>{
+    let review = req.body;
+    reviews.push(review);
+    res.json({message : "Review added!" , reviews : reviews})
+})
+
+app.get("/reviews",(req,res)=>{
+    res.json({reviews : reviews});
 })
 
 app.get("/request-counts",(req,res)=>{
