@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Movie Reviews </title>
+    </head>
+    <body>
+        <h1> Calculator </h1>
+
+        <input id="a" placeholder="Number A" type="number">
+        <input id="b" placeholder="Number B" type="number">
+        <button onclick="calculate()"> Add </button>
+        <p id="result"></p>
+
+        <script>
+            async function calculate(){
+                const a = document.getElementById("a").value;
+                const b = document.getElementById("b").value;
+
+                const res = await fetch(`http://localhost:3000/sum?a=${a}&b=${b}`);
+                const json = await res.json();
+
+                document.getElementById("result").innerHTML = "Answer : " + json.sum;
+            }
+        </script>
+    </body>
+</html>
