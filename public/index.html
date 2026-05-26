@@ -2,24 +2,34 @@
 <html>
     <head>
         <title> Movie Reviews </title>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
     </head>
     <body>
         <h1> Calculator </h1>
 
         <input id="a" placeholder="Number A" type="number">
         <input id="b" placeholder="Number B" type="number">
-        <button onclick="calculate()"> Add </button>
+        <button onclick="calculateFetch()"> Add with Fetch </button>
+        <button onclick="calculateAxios()"> Add with Axios </button>
         <p id="result"></p>
 
         <script>
-            async function calculate(){
+            async function calculateFetch(){
                 const a = document.getElementById("a").value;
                 const b = document.getElementById("b").value;
 
-                const res = await fetch(`/sum?a=${a}&b=${b}`);
+             const res = await fetch(`/sum?a=${a}&b=${b}`);
                 const json = await res.json();
 
                 document.getElementById("result").innerHTML = "Answer : " + json.sum;
+            }
+
+            async function calculateAxios(){
+                const a = document.getElementById("a").value;
+                const b = document.getElementById("b").value;
+                const res = await axios.get(`/sum?a=${a}&b=${b}`);
+
+                document.getElementById("result").innerHTML = "Answer : " + res.data.sum;
             }
         </script>
     </body>
